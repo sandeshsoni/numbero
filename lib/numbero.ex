@@ -1,7 +1,6 @@
 defmodule Numbero do
   @moduledoc """
   Documentation for Numbero.
-  
 
   assignment:
 
@@ -35,8 +34,8 @@ defmodule Numbero do
   ["nouns", "usual"],
   ["onto", "struck"],
   "motortruck"]
-  
-  2282668687 should return the following list 
+
+  2282668687 should return the following list
   [["act", "amounts"],
   ["act", "contour"],
   ["acta", "mounts"],
@@ -46,7 +45,7 @@ defmodule Numbero do
   "catamounts"]
 
   The conversion of a 10 digit phone number should be performed within 1000ms.
-  
+
   """
 
   @doc """
