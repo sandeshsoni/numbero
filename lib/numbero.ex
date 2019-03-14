@@ -80,4 +80,27 @@ defmodule Numbero do
     |> Enum.map(fn digit -> map[digit] end)
     # map[2]
   end
+
+  # form words of characters
+  def bar letters = [] do
+    # a <- abc
+    # b <- pqr
+    # c <- xyz
+
+    # l1 = [ i | l2 ]
+
+
+    # List.to_string abc
+    # baz(i, l2)
+  end
+
+  # for 3 numbers
+  def baz(word1, word2, word3) do
+    for a <- word1, b <- word2, c <- word3, do: [a,b,c]
+  end
+  def baz list, [ x | xs] do
+    []
+  end
+
+
 end
