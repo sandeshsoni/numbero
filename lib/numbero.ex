@@ -60,4 +60,24 @@ defmodule Numbero do
   def hello do
     :world
   end
+
+  # number to all combinations
+  # TODO number must not contain 1 & 0
+  # return list of all combinations
+
+  # 2 = a b c
+  # 3 = d e f
+  # 4 = g h i
+
+  def foo number do
+    map = %{
+      2 => (List.to_tuple ~w(a b c)),
+      3 => (List.to_tuple ~w(d e f)),
+      4 => List.to_tuple ~w(g h i)
+    }
+    number
+    |> Integer.digits
+    |> Enum.map(fn digit -> map[digit] end)
+    # map[2]
+  end
 end
