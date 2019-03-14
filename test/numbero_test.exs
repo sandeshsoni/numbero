@@ -8,17 +8,17 @@ defmodule NumberoTest do
 
 
   test "number to combination" do
-    assert Number.foo(22) contains "AA"
+    # assert Number.foo(22) contains "AA"
   end
 
-  test "complete implement 1" do
-    assert Number.foo(6686787825) == [
-      ["motor", "usual"],
-      ["noun", "struck"],
-      ["nouns", "truck"],
-      ["nouns", "usual"],
-      ["onto", "struck"],
-      "motortruck"]
-  end
+  # test "complete implement 1" do
+  #   assert Number.foo(6686787825) == [
+  #     ["motor", "usual"],
+  #     ["noun", "struck"],
+  #     ["nouns", "truck"],
+  #     ["nouns", "usual"],
+  #     ["onto", "struck"],
+  #     "motortruck"]
+  # end
 
 end

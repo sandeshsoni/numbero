@@ -95,6 +95,16 @@ defmodule Numbero do
   end
 
   # for 3 numbers
+  @doc """
+
+  ## examples
+
+  iex> Numbero.baz('abc', 'def', 'ghi')
+  ['adg', 'adh', 'adi', 'aeg', 'aeh', 'aei', 'afg', 'afh', 'afi', 'bdg', 'bdh',
+   'bdi', 'beg', 'beh', 'bei', 'bfg', 'bfh', 'bfi', 'cdg', 'cdh', 'cdi', 'ceg',
+    'ceh', 'cei', 'cfg', 'cfh', 'cfi']
+
+  """
   def baz(word1, word2, word3) do
     for a <- word1, b <- word2, c <- word3, do: [a,b,c]
   end
