@@ -82,16 +82,38 @@ defmodule Numbero do
   end
 
   # form words of characters
-  def bar letters = [] do
+  # 10 - digits.
+  # all combinations
+  def bar number do
     # a <- abc
     # b <- pqr
     # c <- xyz
 
-    # l1 = [ i | l2 ]
+    mape = %{
+      2 => 'abc',
+      3 => 'def',
+      4 => 'ghi',
+      5 => 'jkl',
+      6 => 'mno',
+      7 => 'pqrs',
+      8 => 'tuv',
+      9 => 'wxyz'
+    }
 
+    nos = Integer.digits(number)
 
-    # List.to_string abc
-    # baz(i, l2)
+    for n1 <- mape[ Enum.at(nos,0) ],
+      n2 <- mape[ Enum.at(nos,1) ],
+      n3 <- mape[ Enum.at(nos,2) ],
+      n4 <- mape[ Enum.at(nos,3) ],
+      n5 <- mape[ Enum.at(nos,4) ],
+      n6 <- mape[ Enum.at(nos,5) ],
+      n7 <- mape[ Enum.at(nos,6) ],
+      n8 <- mape[ Enum.at(nos,7) ],
+      n9 <- mape[ Enum.at(nos,8) ],
+      n10 <- mape[ Enum.at(nos,9) ],
+
+      do: [n1,n2,n3,n4,n5,n6,n7,n8,n9,n10]
   end
 
   # for 3 numbers

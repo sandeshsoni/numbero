@@ -7,8 +7,12 @@ defmodule NumberoTest do
   end
 
 
-  test "number to combination" do
-    # assert Number.foo(22) contains "AA"
+  test "given sampleset, no 6686787825 must contain motorcycle" do
+    assert Enum.member? Numbero.bar(6686787825), 'motortruck'
+  end
+
+  test "given sampleset, no 2282668687 must contain catamounts" do
+    assert Enum.member? Numbero.bar(2282668687), 'catamounts'
   end
 
   # test "complete implement 1" do
