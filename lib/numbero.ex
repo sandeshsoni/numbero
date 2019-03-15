@@ -76,6 +76,11 @@ defmodule Numbero do
 
   # all combinations
   # for a <- l1, b <-l1, String.length(a<>b)==10 ,do: %{ a<>b => [a, b] }
+
+  # for a <- l1, b <-l1,
+  #   String.length(a<>b)==7 && String.length(a) > 2 && String.length(b) > 2,
+  #   do: %{ a<>b => [a, b] }
+
   # for a <- l1, b <-l1, String.length(a<>b)==10 ,do: a <> b
   def foo number do
     map = %{
