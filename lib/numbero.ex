@@ -69,6 +69,14 @@ defmodule Numbero do
   # 3 = d e f
   # 4 = g h i
 
+  # find dictionary meanings
+  def all_words do
+    File.open('assets/dictionary.txt')
+  end
+
+  # all combinations
+  # for a <- l1, b <-l1, String.length(a<>b)==10 ,do: %{ a<>b => [a, b] }
+  # for a <- l1, b <-l1, String.length(a<>b)==10 ,do: a <> b
   def foo number do
     map = %{
       2 => (List.to_tuple ~w(a b c)),
@@ -83,7 +91,6 @@ defmodule Numbero do
 
   # form words of characters
   # 10 - digits.
-  # all combinations
   def bar number do
     # a <- abc
     # b <- pqr
@@ -129,9 +136,6 @@ defmodule Numbero do
   """
   def baz(word1, word2, word3) do
     for a <- word1, b <- word2, c <- word3, do: [a,b,c]
-  end
-  def baz list, [ x | xs] do
-    []
   end
 
 
