@@ -77,6 +77,13 @@ defmodule Numbero do
     # |> Stream.into []
     |> Enum.to_list
     |> Enum.map(&String.trim/1)
+    |> Enum.map(&String.to_charlist/1)
+  end
+
+  # MapSet.intersection(MapSet.new(list1), MapSet.new(list2)) |> Enum.to_list
+  def intersections list1 list2 do
+    MapSet.intersection(MapSet.new(list1), MapSet.new(list2))
+    |> Enum.to_list
   end
 
   # all combinations
