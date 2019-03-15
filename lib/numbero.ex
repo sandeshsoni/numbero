@@ -71,7 +71,12 @@ defmodule Numbero do
 
   # find dictionary meanings
   def all_words do
-    File.open('assets/dictionary.txt')
+    # File.open('assets/dictionary.txt')
+    File.stream!('assets/dictionary.txt')
+    # |> Stream.map(&String.trim/1)
+    # |> Stream.into []
+    |> Enum.to_list
+    |> Enum.map(&String.trim/1)
   end
 
   # all combinations
@@ -102,14 +107,14 @@ defmodule Numbero do
     # c <- xyz
 
     mape = %{
-      2 => 'abc',
-      3 => 'def',
-      4 => 'ghi',
-      5 => 'jkl',
-      6 => 'mno',
-      7 => 'pqrs',
-      8 => 'tuv',
-      9 => 'wxyz'
+      2 => 'ABC',
+      3 => 'DEF',
+      4 => 'GHI',
+      5 => 'JKL',
+      6 => 'MNO',
+      7 => 'PQRS',
+      8 => 'TUV',
+      9 => 'WXYZ'
     }
 
     nos = Integer.digits(number)

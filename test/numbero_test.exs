@@ -8,11 +8,11 @@ defmodule NumberoTest do
 
 
   test "given sampleset, no 6686787825 must contain motorcycle" do
-    assert Enum.member? Numbero.bar(6686787825), 'motortruck'
+    assert Enum.member? Numbero.bar(6686787825), 'MOTORTRUCK'
   end
 
   test "given sampleset, no 2282668687 must contain catamounts" do
-    assert Enum.member? Numbero.bar(2282668687), 'catamounts'
+    assert Enum.member? Numbero.bar(2282668687), 'CATAMOUNTS'
   end
 
   # test "complete implement 1" do
