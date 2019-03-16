@@ -89,13 +89,14 @@ defmodule Numbero do
     |> Enum.to_list
   end
 
-  def foo number do
+  # part experimental function. not needed
+  def get_all_combinations_from input_number do
     map = %{
       2 => (List.to_tuple ~w(a b c)),
       3 => (List.to_tuple ~w(d e f)),
       4 => List.to_tuple ~w(g h i)
     }
-    number
+    input_number
     |> Integer.digits
     |> Enum.map(fn digit -> map[digit] end)
     # map[2]
