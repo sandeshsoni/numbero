@@ -73,27 +73,22 @@ defmodule Numbero do
   def all_words do
     # File.open('assets/dictionary.txt')
     File.stream!('assets/dictionary.txt')
-    # |> Stream.map(&String.trim/1)
+    |> Stream.map(&String.trim/1)
     # |> Stream.into []
     |> Enum.to_list
-    |> Enum.map(&String.trim/1)
-    |> Enum.map(&String.to_charlist/1)
+    # |> List.to_tuple
+    # |> Enum.map(&String.trim/1)
+    # |> Enum.map(&String.to_charlist/1)
+    {:ok, content} = File.read("assets/dictionary.txt")
+    String.split(content, "\n", trim: true)
   end
 
   # MapSet.intersection(MapSet.new(list1), MapSet.new(list2)) |> Enum.to_list
-  def intersections list1 list2 do
+  def intersections list1, list2 do
     MapSet.intersection(MapSet.new(list1), MapSet.new(list2))
     |> Enum.to_list
   end
 
-  # all combinations
-  # for a <- l1, b <-l1, String.length(a<>b)==10 ,do: %{ a<>b => [a, b] }
-
-  # for a <- l1, b <-l1,
-  #   String.length(a<>b)==7 && String.length(a) > 2 && String.length(b) > 2,
-  #   do: %{ a<>b => [a, b] }
-
-  # for a <- l1, b <-l1, String.length(a<>b)==10 ,do: a <> b
   def foo number do
     map = %{
       2 => (List.to_tuple ~w(a b c)),
@@ -138,6 +133,7 @@ defmodule Numbero do
       n10 <- mape[ Enum.at(nos,9) ],
 
       do: [n1,n2,n3,n4,n5,n6,n7,n8,n9,n10]
+    |> Enum.map(&to_string/1)
   end
 
   # for 3 numbers
@@ -151,8 +147,39 @@ defmodule Numbero do
     'ceh', 'cei', 'cfg', 'cfh', 'cfi']
 
   """
-  def baz(word1, word2, word3) do
-    for a <- word1, b <- word2, c <- word3, do: [a,b,c]
+  # all combinations
+  # for a <- l1, b <-l1, String.length(a<>b)==10 ,do: %{ a<>b => [a, b] }
+
+  # for a <- l1, b <-l1,
+  #   String.length(a<>b)==7 && String.length(a) > 2 && String.length(b) > 2,
+  #   do: %{ a<>b => [a, b] }
+
+  # for a <- l1, b <-l1, String.length(a<>b)==10 ,do: a <> b
+  def baz list do
+
+    # list = all_words
+
+    # for a <- word1, b <- word2, c <- word3, do: [a,b,c]
+    # for a <- list, b <-list, String.length(a <> b)==10 ,do: a <> b
+    # for a <- list, b <- list, into: [], do: [a, b]
+    # for a <- list, b <- list, into: [], do: [a, b]
+
+    # for a <- list do: a
+    # for a <- list do
+    #   for b <- list do
+    #     if(length(a ++ b) == 10)
+    #       do (a ++ b)
+    #     end
+    #   end
+    # end
+
+
+    # streame = File.stream!('assets/dictionary.txt')
+    # |> Stream.map(&String.trim/1)
+
+
+    # for a <- streame, b <- streame, length(a ++ b)==10, do: a ++ b
+
   end
 
 
