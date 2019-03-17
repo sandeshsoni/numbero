@@ -83,6 +83,34 @@ defmodule Numbero do
     String.split(content, "\n", trim: true)
   end
 
+
+  # def foo(input_number) when (length input_number == 10) do
+  def foo(input_number) do
+    # number_cominations(input_number)
+
+    # iterate dictionary
+    # take item
+    # form its number
+    # number is at front or end of input_number?
+    # then add it to such key
+    #
+    # print the hash
+
+  end
+
+  defp word_to_no word do
+    # case word do
+    # end
+  end
+
+
+  def number_cominations no do
+    %{
+      straight: %{},
+      reverse: %{}
+    }
+  end
+
   # MapSet.intersection(MapSet.new(list1), MapSet.new(list2)) |> Enum.to_list
   def intersections list1, list2 do
     MapSet.intersection(MapSet.new(list1), MapSet.new(list2))
