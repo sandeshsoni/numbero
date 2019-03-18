@@ -98,10 +98,11 @@ defmodule Numbero do
   #  ["onto", "struck"],
   #  "motortruck"]
   def foo(input_number) do
-    words = ~w(motor truck star onto nouns struck baz motortruck foo bar)
+    # words = ~w(motor truck star onto nouns struck baz motortruck foo bar)
+    # words = all_words
     # number_cominations(input_number)
 
-    words
+    all_words()
     |> Enum.map(&word_to_no/1)
     |> Enum.map(&number_cominations(&1,input_number))
     # iterate dictionary
