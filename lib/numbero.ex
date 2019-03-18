@@ -98,17 +98,41 @@ defmodule Numbero do
 
   end
 
-  defp word_to_no word do
-    # case word do
-    # end
+  def word_to_no word do
+    String.codepoints(word)
+    |> Enum.map(&letter_to_number/1)
+    |> Integer.undigits
+    # |> to_string
+
+    # possibly return {number, length}
+    # next, regex for positions - begin_with, end_with, complete
+    # add or skip... length  being the key
   end
 
+  def letter_to_number letter do
+    input_in_string = fn str -> String.contains? str, letter end
 
-  def number_cominations no do
-    %{
-      straight: %{},
-      reverse: %{}
-    }
+    cond do
+      "ABC" |> String.contains?(letter) -> 2
+      "DEF" |> String.contains?(letter) -> 3
+      input_in_string.("GHI") -> 4
+      input_in_string.("JKL") -> 5
+      input_in_string.("MNO") -> 6
+      input_in_string.("PQRS") -> 7
+      input_in_string.("TUV") -> 8
+      input_in_string.("WXYZ") -> 9
+    end
+
+  end
+
+  # begin or end
+  def number_cominations word_no, input_number do
+    String.starts_with?(input_number, word_no)
+    String.ends_with?(input_number, word_no)
+    # %{
+    #   straight: %{},
+    #   reverse: %{}
+    # }
   end
 
   # MapSet.intersection(MapSet.new(list1), MapSet.new(list2)) |> Enum.to_list
