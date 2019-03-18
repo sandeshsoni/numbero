@@ -98,13 +98,16 @@ defmodule Numbero do
   #  ["onto", "struck"],
   #  "motortruck"]
   def foo(input_number) do
-    # words = ~w(motor truck star onto nouns struck baz motortruck foo bar)
+    words = ~w(motor truck star onto nouns struck baz motortruck foo bar)
     # words = all_words
     # number_cominations(input_number)
 
     all_words()
-    |> Enum.map(&word_to_no/1)
-    |> Enum.map(&number_cominations(&1,input_number))
+    # words
+    # |> Stream.map(&word_to_no/1)
+    # |> Enum.map(&number_cominations(&1,input_number))
+    |> Stream.filter(&String.length(&1)>2)
+    |> Enum.group_by(&number_cominations(&1,input_number))
     # iterate dictionary
     # take item
     # form its number
@@ -120,7 +123,8 @@ defmodule Numbero do
     word
     |> String.upcase
     |> String.codepoints
-    |> Enum.map(&letter_to_number/1)
+    |> Stream.map(&letter_to_number/1)
+    |> Enum.to_list
     |> Integer.undigits
     |> to_string
 
@@ -147,15 +151,16 @@ defmodule Numbero do
   end
 
   # begin or end
-  def number_cominations word_no, input_number do
+  def number_cominations abcword, input_number do
+    # |> Stream.map(&word_to_no/1)
+
+
+    word_no = abcword |> word_to_no
     numb = to_string input_number
     cond do
-      String.starts_with?(numb, word_no) -> %{String.length(word_no)
-                                                      => word_no  }
-      String.ends_with?(numb, word_no) -> %{ String.length(word_no)*-1
-                                                     => word_no}
-      String.starts_with?(numb, word_no) -> %{String.length(word_no)
-                                                      => word_no  }
+      String.starts_with?(numb, word_no) -> String.length(word_no)
+      # String.ends_with?(numb, word_no) -> %{ String.length(word_no)*-1 => word_no }
+      String.ends_with?(numb, word_no) ->  (String.length(word_no)* -1)
       true -> %{}
     end
     # %{
