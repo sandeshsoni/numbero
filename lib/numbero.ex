@@ -85,9 +85,25 @@ defmodule Numbero do
 
 
   # def foo(input_number) when (length input_number == 10) do
+
+  def foo do
+    foo(6686787825 )
+  end
+
+  # 6686787825 should return the following list
+  # [["motor", "usual"],
+  #  ["noun", "struck"],
+  #  ["nouns", "truck"],
+  #  ["nouns", "usual"],
+  #  ["onto", "struck"],
+  #  "motortruck"]
   def foo(input_number) do
+    words = ~w(motor truck star onto nouns struck baz motortruck foo bar)
     # number_cominations(input_number)
 
+    words
+    |> Enum.map(&word_to_no/1)
+    |> Enum.map(&number_cominations(&1,input_number))
     # iterate dictionary
     # take item
     # form its number
@@ -99,10 +115,13 @@ defmodule Numbero do
   end
 
   def word_to_no word do
-    String.codepoints(word)
+
+    word
+    |> String.upcase
+    |> String.codepoints
     |> Enum.map(&letter_to_number/1)
     |> Integer.undigits
-    # |> to_string
+    |> to_string
 
     # possibly return {number, length}
     # next, regex for positions - begin_with, end_with, complete
@@ -121,14 +140,23 @@ defmodule Numbero do
       input_in_string.("PQRS") -> 7
       input_in_string.("TUV") -> 8
       input_in_string.("WXYZ") -> 9
+      true -> 0
     end
 
   end
 
   # begin or end
   def number_cominations word_no, input_number do
-    String.starts_with?(input_number, word_no)
-    String.ends_with?(input_number, word_no)
+    numb = to_string input_number
+    cond do
+      String.starts_with?(numb, word_no) -> %{String.length(word_no)
+                                                      => word_no  }
+      String.ends_with?(numb, word_no) -> %{ String.length(word_no)*-1
+                                                     => word_no}
+      String.starts_with?(numb, word_no) -> %{String.length(word_no)
+                                                      => word_no  }
+      true -> %{}
+    end
     # %{
     #   straight: %{},
     #   reverse: %{}
