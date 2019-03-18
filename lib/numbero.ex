@@ -160,7 +160,7 @@ defmodule Numbero do
     cond do
       String.starts_with?(numb, word_no) -> String.length(word_no)
       # String.ends_with?(numb, word_no) -> %{ String.length(word_no)*-1 => word_no }
-      String.ends_with?(numb, word_no) ->  (String.length(word_no)* -1)
+      String.ends_with?(numb, word_no) ->  ((10 - String.length(word_no)) * -1)
       true -> %{}
     end
     # %{
