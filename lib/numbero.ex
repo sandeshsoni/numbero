@@ -109,7 +109,9 @@ defmodule Numbero do
     |> Stream.filter(&String.length(&1)>2)
     |> Enum.group_by(&number_cominations(&1,input_number))
     |> Map.delete("nomatch")
-    |> Map.put(0,[])
+    # |> Map.to_list
+    # |> List.flatten
+    # |> Map.put(0,[])
     # |> Enum.to_list
 
     # {_, after_remove_invalid} = Map.pop(combinations, "nomatch")
@@ -121,6 +123,9 @@ defmodule Numbero do
     # word_pairs =
     word_pairs_from_list(combinations)
     |> Enum.concat combinations[10]
+
+    # all |> List.flatten |>  Enum.chunk_every(2)
+    # but 10 word problem
 
     # word_pairs ++ valid[10]
     # |> List.flatten
@@ -142,7 +147,7 @@ defmodule Numbero do
   end
 
   def make_pairs list1, list2 do
-    for a <- list1, b <- list2, do: [a <> "_" <> b]
+    for a <- list1, b <- list2, do: [a, b]
   end
 
   def word_to_no word do
