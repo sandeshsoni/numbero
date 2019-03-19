@@ -124,10 +124,14 @@ defmodule Numbero do
     word
     |> String.upcase
     |> String.codepoints
-    |> Stream.map(&letter_to_number/1)
-    |> Enum.to_list
-    |> Integer.undigits
-    |> to_string
+    # |> Stream.map(&letter_to_number/1)
+    # |> Stream.map(&letter_to_number/1)
+    # |> Stream.map(&letter_to_number/1)
+    # |> Stream.map(&letter_to_number/1)
+    |> Enum.map_join(&(letter_to_number(&1)))
+    # |> Enum.to_list
+    # |> Integer.undigits
+    # |> to_string
 
     # possibly return {number, length}
     # next, regex for positions - begin_with, end_with, complete
@@ -136,6 +140,9 @@ defmodule Numbero do
 
   def letter_to_number letter do
     input_in_string = fn str -> String.contains? str, letter end
+
+    # IO.puts input_in_string.("ABC")
+    # IO.puts "letter : " <> letter
 
     cond do
       "ABC" |> String.contains?(letter) -> 2
