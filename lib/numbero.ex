@@ -102,12 +102,24 @@ defmodule Numbero do
     # words = all_words
     # number_cominations(input_number)
 
-    all_words()
+    combinations = all_words()
     # words
     # |> Stream.map(&word_to_no/1)
     # |> Enum.map(&number_cominations(&1,input_number))
     |> Stream.filter(&String.length(&1)>2)
     |> Enum.group_by(&number_cominations(&1,input_number))
+
+    {_, after_remove_invalid} = Map.pop(combinations, "nomatch")
+    valid = Map.put(after_remove_invalid, 0, [])
+
+    vlist = valid |> Enum.to_list
+
+    word_pairs = word_pairs_from_list(vlist)
+
+    word_pairs ++ valid[10]
+    |> List.flatten
+
+    # Map.pop("nomatch")
 
     # iterate dictionary
     # take item
@@ -117,6 +129,14 @@ defmodule Numbero do
     #
     # print the hash
 
+  end
+
+  defp word_pairs_from_list vlist do
+    for {a,la} <- vlist , {b, lb} <- vlist, (a + b == 0) && a > b, do: make_pairs(la, lb)
+  end
+
+  def make_pairs list1, list2 do
+    for a <- list1, b <- list2, do: [a <> "_" <> b]
   end
 
   def word_to_no word do
