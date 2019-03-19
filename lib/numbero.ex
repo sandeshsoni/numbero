@@ -108,16 +108,22 @@ defmodule Numbero do
     # |> Enum.map(&number_cominations(&1,input_number))
     |> Stream.filter(&String.length(&1)>2)
     |> Enum.group_by(&number_cominations(&1,input_number))
+    |> Map.delete("nomatch")
+    |> Map.put(0,[])
+    # |> Enum.to_list
 
-    {_, after_remove_invalid} = Map.pop(combinations, "nomatch")
-    valid = Map.put(after_remove_invalid, 0, [])
+    # {_, after_remove_invalid} = Map.pop(combinations, "nomatch")
+    # valid = Map.put(after_remove_invalid, 0, [])
 
-    vlist = valid |> Enum.to_list
+    # vlist = valid |> Enum.to_list
 
-    word_pairs = word_pairs_from_list(vlist)
+    # word_pairs = word_pairs_from_list(vlist)
+    # word_pairs =
+    word_pairs_from_list(combinations)
+    |> Enum.concat combinations[10]
 
-    word_pairs ++ valid[10]
-    |> List.flatten
+    # word_pairs ++ valid[10]
+    # |> List.flatten
 
     # Map.pop("nomatch")
 
