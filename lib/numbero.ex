@@ -108,6 +108,7 @@ defmodule Numbero do
     # |> Enum.map(&number_cominations(&1,input_number))
     |> Stream.filter(&String.length(&1)>2)
     |> Enum.group_by(&number_cominations(&1,input_number))
+
     # iterate dictionary
     # take item
     # form its number
@@ -161,7 +162,7 @@ defmodule Numbero do
       String.starts_with?(numb, word_no) -> String.length(word_no)
       # String.ends_with?(numb, word_no) -> %{ String.length(word_no)*-1 => word_no }
       String.ends_with?(numb, word_no) ->  ((10 - String.length(word_no)) * -1)
-      true -> %{}
+      true -> "nomatch"
     end
     # %{
     #   straight: %{},
