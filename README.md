@@ -1,21 +1,47 @@
 # Numbero
 
-**TODO: Add description**
+## assignment:
+## coding puzzle
 
-## Installation
+  Given a 10 digit phone number, you must return all
+  possible words or combination of words
+  from the provided dictionary,
+  that can be mapped back as a whole to the number.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `numbero` to your list of dependencies in `mix.exs`:
+  With this we can generate numbers
+  like 1-800-motortruck which is easier to remember then 1-800-6686787825
+  The phone number mapping to letters is as follows:
 
-```elixir
-def deps do
-  [
-    {:numbero, "~> 0.1.0"}
-  ]
-end
-```
+  2 = a b c
+  3 = d e f
+  4 = g h i
+  5 = j k l
+  6 = m n o
+  7 = p q r s
+  8 = t u v
+  9 = w x y z
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/numbero](https://hexdocs.pm/numbero).
+  The phone numbers will never contain a 0 or 1.
+  Words have to be at least 3 characters.
+
+  To get give you an initial verification, the following must be true:
+
+  6686787825 should return the following list
+  [["motor", "usual"],
+  ["noun", "struck"],
+  ["nouns", "truck"],
+  ["nouns", "usual"],
+  ["onto", "struck"],
+  "motortruck"]
+
+  2282668687 should return the following list
+  [["act", "amounts"],
+  ["act", "contour"],
+  ["acta", "mounts"],
+  ["bat", "amounts"],
+  ["bat", "contour"],
+  ["cat", "contour"],
+  "catamounts"]
+
+  The conversion of a 10 digit phone number should be performed within 1000ms.
 
