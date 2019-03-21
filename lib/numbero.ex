@@ -48,127 +48,49 @@ defmodule Numbero do
 
   """
 
-  @doc """
-  Hello world.
 
-  ## Examples
-
-      iex> Numbero.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
-
-  # number to all combinations
-  # TODO number must not contain 1 & 0
-  # return list of all combinations
-
-  # 2 = a b c
-  # 3 = d e f
-  # 4 = g h i
-
-  # find dictionary meanings
-  def all_words do
-    # File.open('assets/dictionary.txt')
+  # get a list of all dictionary words
+  defp all_words do
     File.stream!('assets/dictionary.txt')
     |> Stream.map(&String.trim/1)
-    # |> Stream.into []
     |> Enum.to_list
-    # |> List.to_tuple
-    # |> Enum.map(&String.trim/1)
-    # |> Enum.map(&String.to_charlist/1)
     {:ok, content} = File.read("assets/dictionary.txt")
     String.split(content, "\n", trim: true)
   end
 
-
-  # def foo(input_number) when (length input_number == 10) do
-
-  def foo do
-    foo(6686787825 )
+  def process do
+    process(6686787825 )
   end
 
-  # 6686787825 should return the following list
-  # [["motor", "usual"],
-  #  ["noun", "struck"],
-  #  ["nouns", "truck"],
-  #  ["nouns", "usual"],
-  #  ["onto", "struck"],
-  #  "motortruck"]
-  def foo(input_number) do
-    words = ~w(motor truck star onto nouns struck baz motortruck foo bar)
-    # words = all_words
-    # number_cominations(input_number)
+  def process(input_number) do
+    # words = ~w(motor truck star onto nouns struck baz motortruck foo bar)
 
     combinations = all_words()
-    # words
-    # |> Stream.map(&word_to_no/1)
-    # |> Enum.map(&number_cominations(&1,input_number))
     |> Stream.filter(&String.length(&1)>2)
     |> Enum.group_by(&number_cominations(&1,input_number))
     |> Map.delete("nomatch")
-    # |> Map.to_list
-    # |> List.flatten
-    # |> Map.put(0,[])
-    # |> Enum.to_list
 
-    # {_, after_remove_invalid} = Map.pop(combinations, "nomatch")
-    # valid = Map.put(after_remove_invalid, 0, [])
-
-    # vlist = valid |> Enum.to_list
-
-    # word_pairs = word_pairs_from_list(vlist)
-    # word_pairs =
     word_pairs_from_list(combinations)
     |> List.flatten
     |> Enum.chunk_every(2)
     |> Enum.concat combinations[10]
 
-    # all |> List.flatten |>  Enum.chunk_every(2)
-    # but 10 word problem
-
-    # word_pairs ++ valid[10]
-    # |> List.flatten
-
-    # Map.pop("nomatch")
-
-    # iterate dictionary
-    # take item
-    # form its number
-    # number is at front or end of input_number?
-    # then add it to such key
-    #
-    # print the hash
-
   end
 
   defp word_pairs_from_list vlist do
-    for {a,la} <- vlist , {b, lb} <- vlist, (a + b == 0) && a > b, do: make_pairs(la, lb)
+    for {a,la} <- vlist , {b, lb} <- vlist, (a + b == 0) && a > b,
+      do: make_pairs(la, lb)
   end
 
-  def make_pairs list1, list2 do
+  defp make_pairs list1, list2 do
     for a <- list1, b <- list2, do: [a, b]
   end
 
   def word_to_no word do
-
     word
     |> String.upcase
     |> String.codepoints
-    # |> Stream.map(&letter_to_number/1)
-    # |> Stream.map(&letter_to_number/1)
-    # |> Stream.map(&letter_to_number/1)
-    # |> Stream.map(&letter_to_number/1)
     |> Enum.map_join(&(letter_to_number(&1)))
-    # |> Enum.to_list
-    # |> Integer.undigits
-    # |> to_string
-
-    # possibly return {number, length}
-    # next, regex for positions - begin_with, end_with, complete
-    # add or skip... length  being the key
   end
 
   def letter_to_number letter do
@@ -189,8 +111,8 @@ defmodule Numbero do
   end
 
   def number_cominations abcword, input_number do
-
     word_no = abcword |> word_to_no
+
     numb = to_string input_number
     cond do
       String.starts_with?(numb, word_no) -> String.length(word_no)
@@ -199,58 +121,65 @@ defmodule Numbero do
     end
   end
 
+  ##############################################
+  #####
+  ##### COMMENTED BELOW OLD LOGIC.
+  ##### CORRECT BUT NOT PERFORMANCE RELEVANT
+  #####
+  ##############################################
+
   # MapSet.intersection(MapSet.new(list1), MapSet.new(list2)) |> Enum.to_list
-  def intersections list1, list2 do
-    MapSet.intersection(MapSet.new(list1), MapSet.new(list2))
-    |> Enum.to_list
-  end
+  # def intersections list1, list2 do
+  #   MapSet.intersection(MapSet.new(list1), MapSet.new(list2))
+  #   |> Enum.to_list
+  # end
 
   # part experimental function. not needed
-  def get_all_combinations_from input_number do
-    map = %{
-      2 => (List.to_tuple ~w(a b c)),
-      3 => (List.to_tuple ~w(d e f)),
-      4 => List.to_tuple ~w(g h i)
-    }
-    input_number
-    |> Integer.digits
-    |> Enum.map(fn digit -> map[digit] end)
-  end
+  # def get_all_combinations_from input_number do
+  #   map = %{
+  #     2 => (List.to_tuple ~w(a b c)),
+  #     3 => (List.to_tuple ~w(d e f)),
+  #     4 => List.to_tuple ~w(g h i)
+  #   }
+  #   input_number
+  #   |> Integer.digits
+  #   |> Enum.map(fn digit -> map[digit] end)
+  # end
 
   # form words of characters
   # 10 - digits.
-  def bar number do
-    # a <- abc
-    # b <- pqr
-    # c <- xyz
+  # def bar number do
+  #   # a <- abc
+  #   # b <- pqr
+  #   # c <- xyz
 
-    mape = %{
-      2 => 'ABC',
-      3 => 'DEF',
-      4 => 'GHI',
-      5 => 'JKL',
-      6 => 'MNO',
-      7 => 'PQRS',
-      8 => 'TUV',
-      9 => 'WXYZ'
-    }
+  #   mape = %{
+  #     2 => 'ABC',
+  #     3 => 'DEF',
+  #     4 => 'GHI',
+  #     5 => 'JKL',
+  #     6 => 'MNO',
+  #     7 => 'PQRS',
+  #     8 => 'TUV',
+  #     9 => 'WXYZ'
+  #   }
 
-    nos = Integer.digits(number)
+  #   nos = Integer.digits(number)
 
-    for n1 <- mape[ Enum.at(nos,0) ],
-      n2 <- mape[ Enum.at(nos,1) ],
-      n3 <- mape[ Enum.at(nos,2) ],
-      n4 <- mape[ Enum.at(nos,3) ],
-      n5 <- mape[ Enum.at(nos,4) ],
-      n6 <- mape[ Enum.at(nos,5) ],
-      n7 <- mape[ Enum.at(nos,6) ],
-      n8 <- mape[ Enum.at(nos,7) ],
-      n9 <- mape[ Enum.at(nos,8) ],
-      n10 <- mape[ Enum.at(nos,9) ],
+  #   for n1 <- mape[ Enum.at(nos,0) ],
+  #     n2 <- mape[ Enum.at(nos,1) ],
+  #     n3 <- mape[ Enum.at(nos,2) ],
+  #     n4 <- mape[ Enum.at(nos,3) ],
+  #     n5 <- mape[ Enum.at(nos,4) ],
+  #     n6 <- mape[ Enum.at(nos,5) ],
+  #     n7 <- mape[ Enum.at(nos,6) ],
+  #     n8 <- mape[ Enum.at(nos,7) ],
+  #     n9 <- mape[ Enum.at(nos,8) ],
+  #     n10 <- mape[ Enum.at(nos,9) ],
 
-      do: [n1,n2,n3,n4,n5,n6,n7,n8,n9,n10]
-    |> Enum.map(&to_string/1)
-  end
+  #     do: [n1,n2,n3,n4,n5,n6,n7,n8,n9,n10]
+  #   |> Enum.map(&to_string/1)
+  # end
 
   # for 3 numbers
   @doc """
