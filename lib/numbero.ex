@@ -122,6 +122,8 @@ defmodule Numbero do
     # word_pairs = word_pairs_from_list(vlist)
     # word_pairs =
     word_pairs_from_list(combinations)
+    |> List.flatten
+    |> Enum.chunk_every(2)
     |> Enum.concat combinations[10]
 
     # all |> List.flatten |>  Enum.chunk_every(2)
@@ -172,12 +174,9 @@ defmodule Numbero do
   def letter_to_number letter do
     input_in_string = fn str -> String.contains? str, letter end
 
-    # IO.puts input_in_string.("ABC")
-    # IO.puts "letter : " <> letter
-
     cond do
-      "ABC" |> String.contains?(letter) -> 2
-      "DEF" |> String.contains?(letter) -> 3
+      input_in_string.("ABC") -> 2
+      input_in_string.("DEF") -> 3
       input_in_string.("GHI") -> 4
       input_in_string.("JKL") -> 5
       input_in_string.("MNO") -> 6
@@ -189,23 +188,15 @@ defmodule Numbero do
 
   end
 
-  # begin or end
   def number_cominations abcword, input_number do
-    # |> Stream.map(&word_to_no/1)
-
 
     word_no = abcword |> word_to_no
     numb = to_string input_number
     cond do
       String.starts_with?(numb, word_no) -> String.length(word_no)
-      # String.ends_with?(numb, word_no) -> %{ String.length(word_no)*-1 => word_no }
       String.ends_with?(numb, word_no) ->  ((10 - String.length(word_no)) * -1)
       true -> "nomatch"
     end
-    # %{
-    #   straight: %{},
-    #   reverse: %{}
-    # }
   end
 
   # MapSet.intersection(MapSet.new(list1), MapSet.new(list2)) |> Enum.to_list
@@ -224,7 +215,6 @@ defmodule Numbero do
     input_number
     |> Integer.digits
     |> Enum.map(fn digit -> map[digit] end)
-    # map[2]
   end
 
   # form words of characters
